@@ -55,11 +55,14 @@ a {
 
 /* Ensure logo and title centers align */
 .header-box h1 {
-    margin: 0; /* remove UA default margins that offset centering */
+    margin: 0;
+    /* remove UA default margins that offset centering */
     line-height: 1.2;
 }
+
 .header-box img {
-    display: block; /* avoid baseline alignment quirks */
+    display: block;
+    /* avoid baseline alignment quirks */
 }
 
 .column {
