@@ -1,0 +1,156 @@
+[
+  {
+    "quadrant": 0,
+    "ring": 0,
+    "label": "Microsoft Dataverse",
+    "link": "https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro",
+    "status": 0
+  },
+  {
+    "quadrant": 0,
+    "ring": 0,
+    "label": "Microsoft Copilot Studio",
+    "link": "https://learn.microsoft.com/en-us/microsoft-copilot-studio",
+    "status": 0
+  },
+  {
+    "quadrant": 0,
+    "ring": 0,
+    "label": "Power Pages (external portals)",
+    "link": "https://learn.microsoft.com/power-pages/overview",
+    "status": 0
+  },
+  {
+    "quadrant": 0,
+    "ring": 1,
+    "label": "Microsoft Fabric",
+    "link": "https://www.microsoft.com/microsoft-fabric",
+    "status": 0
+  },
+  {
+    "quadrant": 0,
+    "ring": 1,
+    "label": "Azure Logic Apps/Functions for advanced scenarios",
+    "link": "https://learn.microsoft.com/azure/logic-apps/logic-apps-overview",
+    "status": 0
+  },
+  {
+    "quadrant": 0,
+    "ring": 3,
+    "label": "Usage of other low-code platforms (replace with Power Platform)",
+    "link": "",
+    "status": 0
+  },
+   {
+    "quadrant": 1,
+    "ring": 0,
+    "label": "Power Fx",
+    "link": "https://learn.microsoft.com/power-platform/power-fx/overview",
+    "status": 0
+  },
+   {
+    "quadrant": 1,
+    "ring": 0,
+    "label": "Data Analysis Expressions (DAX) for Power BI",
+    "link": "https://learn.microsoft.com/en-us/dax",
+    "status": 0
+  },
+  {
+    "quadrant": 1,
+    "ring": 1,
+    "label": "Copilot in Power Apps & Power Automate (natural language to app/flow)",
+    "link": "https://learn.microsoft.com/power-platform/copilot/copilot-overview",
+    "status": 0
+  },
+  {
+    "quadrant": 1,
+    "ring": 1,
+    "label": "Custom Connectors (with C# / JavaScript)",
+    "link": "https://learn.microsoft.com/connectors/custom-connectors/",
+    "status": 0
+  },
+  {
+    "quadrant": 1,
+    "ring": 3,
+    "label": "Legacy workflow scripting (migrate to Power Automate)",
+    "link": "https://learn.microsoft.com/power-automate/",
+    "status": 0
+  },
+  {
+    "quadrant": 2,
+    "ring": 0,
+    "label": "Citizen Development",
+    "link": "https://learn.microsoft.com/power-platform/admin/citizen-developer-overview",
+    "status": 0
+  },
+  {
+    "quadrant": 2,
+    "ring": 0,
+    "label": "Fusion Teams (business + pro dev)",
+    "link": "https://learn.microsoft.com/en-us/power-platform/developer/fusion-development",
+    "status": 0
+  },
+  {
+    "quadrant": 2,
+    "ring": 1,
+    "label": "Power Platform Center of Excellence (CoE) Kit",
+    "link": "https://learn.microsoft.com/power-platform/guidance/coe/starter-kit",
+    "status": 0
+  },
+  {
+    "quadrant": 2,
+    "ring": 3,
+    "label": "Uncontrolled app sprawl (no governance)",
+    "link": "https://learn.microsoft.com/power-platform/admin/governance-overview",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 0,
+    "label": "GitHub Copilot",
+    "link": "https://github.com/features/copilot",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 0,
+    "label": "Power Apps",
+    "link": "https://learn.microsoft.com/power-apps/",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 0,
+    "label": "Power Automate",
+    "link": "https://learn.microsoft.com/power-automate/",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 0,
+    "label": "Power Platform Admin Center (centralized management)",
+    "link": "https://learn.microsoft.com/en-us/power-platform/admin/",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 0,
+    "label": "Solution-aware ALM (managed solutions)",
+    "link": "https://learn.microsoft.com/power-platform/alm/what-alm",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 1,
+    "label": "GitHub Actions for Power Platform CI/CD",
+    "link": "https://learn.microsoft.com/power-platform/alm/devops-github-actions",
+    "status": 0
+  },
+  {
+    "quadrant": 3,
+    "ring": 2,
+    "label": "Telemetry via Application Insights for Power Apps",
+    "link": "https://learn.microsoft.com/power-apps/maker/data-platform/telemetry",
+    "status": 0
+  }
+]
