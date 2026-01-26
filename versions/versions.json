@@ -8,5 +8,10 @@
         "version": "2026-01-13",
         "title": "2026.01.13",
         "description": "Update Track Power Power Platform & Copilot"
+    },
+    {
+        "version": "2026-01-26",
+        "title": "2026.01.26",
+        "description": "Update Track Data & AI"
     }
 ]
