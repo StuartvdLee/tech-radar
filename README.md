@@ -27,7 +27,7 @@ Deze repository bevat:
 
 ## Gebruik
 
-Open de [Sopra Steria ALMTech Radar]() in een webbrowser om de interactieve Tech Radar te bekijken. De radar toont alle technologieën georganiseerd in vier kwadranten:
+Open de [Sopra Steria ALMTech Radar](https://www.almtech-radar.nl/) in een webbrowser om de interactieve Tech Radar te bekijken. De radar toont alle technologieën georganiseerd in vier kwadranten:
 
 1. **Infrastructuur & Platformen** (kwadrant 0) - Infrastructure en hosting platforms
 2. **Talen & Frameworks** (kwadrant 1) - Programmeertalen en ontwikkel-frameworks  
