@@ -22,7 +22,7 @@ De inhoud van de Sopra Steria ALMTech Radar wordt regelmatig vastgesteld door on
 Deze repository bevat:
 
 - **Interactieve Tech Radar**: Een webgebaseerde visualisatie van onze technologie-stack
-- **Versie Geschiedenis**: Alle vorige versies van de Tech Radar zijn beschikbaar in de [Changelog]()
+- **Versie Geschiedenis**: Alle vorige versies van de Tech Radar zijn beschikbaar in de [Changelog](https://www.almtech-radar.nl/changelog.html)
 - **Changelog**: Overzicht van wijzigingen tussen versies
 
 ## Gebruik
@@ -36,7 +36,7 @@ Open de [Sopra Steria ALMTech Radar](https://www.almtech-radar.nl/) in een webbr
 
 ## Versies
 
-Vorige versies kan je hier vinden: [Changelog]()
+Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
 
 ## Over Sopra Steria
 
