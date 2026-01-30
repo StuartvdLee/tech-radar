@@ -409,6 +409,14 @@
   },
   {
     "quadrant": 0,
+    "ring": 0,
+    "label": "Kubernetes",
+    "link": "https://kubernetes.io/",
+    "category": ["Cloud"],
+    "status": 1
+  },
+  {
+    "quadrant": 0,
     "ring": 2,
     "label": "OpenShift",
     "link": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
@@ -421,6 +429,22 @@
     "label": "Open Telemetry",
     "link": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
     "category": ["Monitoring"],
+    "status": 1
+  },
+  {
+    "quadrant": 0,
+    "ring": 1,
+    "label": "Aspire",
+    "link": "https://aspire.dev/",
+    "category": ["Development"],
+    "status": 1
+  },
+  {
+    "quadrant": 0,
+    "ring": 1,
+    "label": "DevContainers",
+    "link": "https://containers.dev/",
+    "category": ["Development"],
     "status": 1
   }
 ]
