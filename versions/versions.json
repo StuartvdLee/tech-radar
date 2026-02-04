@@ -18,5 +18,10 @@
         "version": "2026-01-28",
         "title": "2026.01.28",
         "description": "Update Track Applications"
+    },
+    {
+        "version": "2026-02-04",
+        "title": "2026.02.04",
+        "description": "Update Track DevOps"
     }
 ]
