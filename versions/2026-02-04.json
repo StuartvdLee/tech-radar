@@ -4,9 +4,7 @@
     "ring": 0,
     "label": "Microsoft Dataverse",
     "link": "https://learn.microsoft.com/power-apps/maker/data-platform/data-platform-intro",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -14,9 +12,7 @@
     "ring": 0,
     "label": "Microsoft Copilot Studio",
     "link": "https://learn.microsoft.com/en-us/microsoft-copilot-studio",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 0
   },
   {
@@ -24,9 +20,7 @@
     "ring": 0,
     "label": "Power Pages (external portals)",
     "link": "https://learn.microsoft.com/power-pages/overview",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -34,9 +28,7 @@
     "ring": 0,
     "label": "AI Builder",
     "link": "https://learn.microsoft.com/ai-builder/overview",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -44,9 +36,7 @@
     "ring": 0,
     "label": "Azure AI Document Intelligence",
     "link": "https://learn.microsoft.com/azure/ai-services/document-intelligence/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -54,9 +44,7 @@
     "ring": 0,
     "label": "Azure Cognitive Services",
     "link": "https://learn.microsoft.com/azure/ai-services/what-are-ai-services",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -64,9 +52,7 @@
     "ring": 1,
     "label": "Microsoft Fabric",
     "link": "https://www.microsoft.com/microsoft-fabric",
-    "category": [
-      "Data & Analytics"
-    ],
+    "category": ["Data & Analytics"],
     "status": 0
   },
   {
@@ -74,9 +60,7 @@
     "ring": 1,
     "label": "Azure Logic Apps/Functions for advanced scenarios",
     "link": "https://learn.microsoft.com/azure/logic-apps/logic-apps-overview",
-    "category": [
-      "Azure"
-    ],
+    "category": ["Azure"],
     "status": 0
   },
   {
@@ -84,9 +68,7 @@
     "ring": 1,
     "label": "Azure OpenAI Service",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/overview",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -94,9 +76,7 @@
     "ring": 1,
     "label": "Azure AI Studio",
     "link": "https://learn.microsoft.com/azure/ai-studio/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -104,10 +84,7 @@
     "ring": 1,
     "label": "Azure Content Safety",
     "link": "https://learn.microsoft.com/azure/ai-services/content-safety/",
-    "category": [
-      "AI",
-      "Security"
-    ],
+    "category": ["AI", "Security"],
     "status": 1
   },
   {
@@ -115,9 +92,7 @@
     "ring": 1,
     "label": "Azure Bot Service / Bot Framework",
     "link": "https://learn.microsoft.com/azure/bot-service/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -125,9 +100,7 @@
     "ring": 2,
     "label": "Phi models (Microsoft's SLMs)",
     "link": "https://azure.microsoft.com/en-us/blog/introducing-phi-3/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -135,9 +108,7 @@
     "ring": 3,
     "label": "Usage of other low-code platforms (replace with Power Platform)",
     "link": "",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -145,29 +116,23 @@
     "ring": 0,
     "label": "Model Context Protocol",
     "link": "https://modelcontextprotocol.io/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
-  {
+   {
     "quadrant": 1,
     "ring": 0,
     "label": "Power Fx",
     "link": "https://learn.microsoft.com/power-platform/power-fx/overview",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
-  {
+   {
     "quadrant": 1,
     "ring": 0,
     "label": "Data Analysis Expressions (DAX) for Power BI",
     "link": "https://learn.microsoft.com/en-us/dax",
-    "category": [
-      "Data & Analytics"
-    ],
+    "category": ["Data & Analytics"],
     "status": 0
   },
   {
@@ -175,9 +140,7 @@
     "ring": 1,
     "label": "Copilot in Power Apps & Power Automate (natural language to app/flow)",
     "link": "https://learn.microsoft.com/power-platform/copilot/copilot-overview",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 0
   },
   {
@@ -185,9 +148,7 @@
     "ring": 1,
     "label": "Custom Connectors (with C# / JavaScript)",
     "link": "https://learn.microsoft.com/connectors/custom-connectors/",
-    "category": [
-      "Development"
-    ],
+    "category": ["Development"],
     "status": 0
   },
   {
@@ -195,9 +156,7 @@
     "ring": 1,
     "label": "Context engineering",
     "link": "https://www.anthropic.com/news/contextual-retrieval",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -205,9 +164,7 @@
     "ring": 1,
     "label": "Microsoft Agent Service",
     "link": "https://learn.microsoft.com/azure/ai-services/agents/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -215,9 +172,7 @@
     "ring": 1,
     "label": "Prompt flow",
     "link": "https://learn.microsoft.com/azure/machine-learning/prompt-flow/overview-what-is-prompt-flow",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -225,9 +180,7 @@
     "ring": 1,
     "label": "Retrieval Augmented Generation (RAG)",
     "link": "https://learn.microsoft.com/azure/ai-studio/concepts/retrieval-augmented-generation",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -235,9 +188,7 @@
     "ring": 1,
     "label": "GraphRAG",
     "link": "https://github.com/microsoft/graphrag",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -245,9 +196,7 @@
     "ring": 2,
     "label": "ONNX Runtime",
     "link": "https://onnxruntime.ai/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -255,9 +204,7 @@
     "ring": 3,
     "label": "Legacy workflow scripting (migrate to Power Automate)",
     "link": "https://learn.microsoft.com/power-automate/",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -265,9 +212,7 @@
     "ring": 0,
     "label": "Citizen Development",
     "link": "https://learn.microsoft.com/power-platform/admin/citizen-developer-overview",
-    "category": [
-      "Development"
-    ],
+    "category": ["Development"],
     "status": 0
   },
   {
@@ -275,9 +220,7 @@
     "ring": 0,
     "label": "Fusion Teams (business + pro dev)",
     "link": "https://learn.microsoft.com/en-us/power-platform/developer/fusion-development",
-    "category": [
-      "Development"
-    ],
+    "category": ["Development"],
     "status": 0
   },
   {
@@ -285,9 +228,7 @@
     "ring": 0,
     "label": "Prompt engineering best practices",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/concepts/prompt-engineering",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -295,10 +236,7 @@
     "ring": 0,
     "label": "AI governance & responsible AI",
     "link": "https://learn.microsoft.com/azure/cloud-adoption-framework/innovate/best-practices/trusted-ai",
-    "category": [
-      "AI",
-      "Security"
-    ],
+    "category": ["AI", "Security"],
     "status": 1
   },
   {
@@ -306,9 +244,7 @@
     "ring": 1,
     "label": "Power Platform Center of Excellence (CoE) Kit",
     "link": "https://learn.microsoft.com/power-platform/guidance/coe/starter-kit",
-    "category": [
-      "Governance"
-    ],
+    "category": ["Governance"],
     "status": 0
   },
   {
@@ -316,9 +252,7 @@
     "ring": 1,
     "label": "Local LLM deployment",
     "link": "https://foundry.microsoft.com/what-we-offer/local-sdk",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -326,9 +260,7 @@
     "ring": 1,
     "label": "LLMOps practices",
     "link": "https://learn.microsoft.com/azure/machine-learning/prompt-flow/concept-llm-ops",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -336,9 +268,7 @@
     "ring": 1,
     "label": "Prompt caching strategies",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/how-to/latency",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -346,9 +276,7 @@
     "ring": 2,
     "label": "AI model fine-tuning strategies",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/how-to/fine-tuning",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -356,9 +284,7 @@
     "ring": 2,
     "label": "Multi-modal AI applications",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/concepts/models#gpt-4-turbo-and-gpt-4",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -366,9 +292,7 @@
     "ring": 2,
     "label": "AI cost optimization patterns",
     "link": "https://learn.microsoft.com/azure/well-architected/ai/cost-optimization",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -376,10 +300,7 @@
     "ring": 2,
     "label": "AI red teaming",
     "link": "https://learn.microsoft.com/azure/ai-services/openai/concepts/red-teaming",
-    "category": [
-      "AI",
-      "Security"
-    ],
+    "category": ["AI", "Security"],
     "status": 1
   },
   {
@@ -387,9 +308,7 @@
     "ring": 3,
     "label": "Uncontrolled app sprawl (no governance)",
     "link": "https://learn.microsoft.com/power-platform/admin/governance-overview",
-    "category": [
-      "Governance"
-    ],
+    "category": ["Governance"],
     "status": 0
   },
   {
@@ -397,9 +316,7 @@
     "ring": 0,
     "label": "GitHub Copilot",
     "link": "https://github.com/features/copilot",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 0
   },
   {
@@ -407,9 +324,7 @@
     "ring": 0,
     "label": "Power Apps",
     "link": "https://learn.microsoft.com/power-apps/",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -417,9 +332,7 @@
     "ring": 0,
     "label": "Power Automate",
     "link": "https://learn.microsoft.com/power-automate/",
-    "category": [
-      "Power Platform"
-    ],
+    "category": ["Power Platform"],
     "status": 0
   },
   {
@@ -427,10 +340,7 @@
     "ring": 0,
     "label": "Power Platform Admin Center (centralized management)",
     "link": "https://learn.microsoft.com/en-us/power-platform/admin/",
-    "category": [
-      "Governance",
-      "Security"
-    ],
+    "category": ["Governance", "Security"],
     "status": 0
   },
   {
@@ -438,9 +348,7 @@
     "ring": 0,
     "label": "Solution-aware ALM (managed solutions)",
     "link": "https://learn.microsoft.com/power-platform/alm/what-alm",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 0
   },
   {
@@ -448,9 +356,7 @@
     "ring": 0,
     "label": "Microsoft Foundry",
     "link": "https://foundry.microsoft.com/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -458,9 +364,7 @@
     "ring": 1,
     "label": "GitHub Actions for Power Platform CI/CD",
     "link": "https://learn.microsoft.com/power-platform/alm/devops-github-actions",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 0
   },
   {
@@ -468,9 +372,7 @@
     "ring": 1,
     "label": "Azure AI Search (with vector capabilities)",
     "link": "https://learn.microsoft.com/azure/search/search-what-is-azure-search",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -478,10 +380,7 @@
     "ring": 2,
     "label": "Telemetry via Application Insights for Power Apps",
     "link": "https://learn.microsoft.com/power-apps/maker/data-platform/telemetry",
-    "category": [
-      "Monitoring",
-      "Security"
-    ],
+    "category": ["Monitoring", "Security"],
     "status": 0
   },
   {
@@ -489,9 +388,7 @@
     "ring": 2,
     "label": "Microsoft 365 Copilot extensibility",
     "link": "https://learn.microsoft.com/microsoft-365-copilot/extensibility/",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -499,9 +396,7 @@
     "ring": 2,
     "label": "AI evaluation tools",
     "link": "https://learn.microsoft.com/azure/ai-studio/concepts/evaluation-approach-gen-ai",
-    "category": [
-      "AI"
-    ],
+    "category": ["AI"],
     "status": 1
   },
   {
@@ -509,9 +404,7 @@
     "ring": 0,
     "label": "Kubernetes",
     "link": "https://kubernetes.io/",
-    "category": [
-      "Cloud"
-    ],
+    "category": ["Cloud"],
     "status": 1
   },
   {
@@ -519,19 +412,15 @@
     "ring": 2,
     "label": "OpenShift",
     "link": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
-    "category": [
-      "Cloud"
-    ],
+    "category": ["Cloud"],
     "status": 1
   },
   {
     "quadrant": 1,
     "ring": 0,
-    "label": "Open Telemetry",
-    "link": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
-    "category": [
-      "Monitoring"
-    ],
+    "label": "OpenTelemetry",
+    "link": "https://opentelemetry.io/",
+    "category": ["Monitoring"],
     "status": 1
   },
   {
@@ -539,9 +428,7 @@
     "ring": 1,
     "label": "Aspire",
     "link": "https://aspire.dev/",
-    "category": [
-      "Development"
-    ],
+    "category": ["Development"],
     "status": 1
   },
   {
@@ -549,9 +436,7 @@
     "ring": 1,
     "label": "DevContainers",
     "link": "https://containers.dev/",
-    "category": [
-      "Development"
-    ],
+    "category": ["Development"],
     "status": 1
   },
   {
@@ -559,9 +444,7 @@
     "ring": 0,
     "label": "GitHub Actions",
     "link": "https://github.com/features/actions",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -569,9 +452,7 @@
     "ring": 0,
     "label": "Azure Pipelines",
     "link": "https://azure.microsoft.com/en-us/products/devops/pipelines",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -579,9 +460,7 @@
     "ring": 0,
     "label": "Bicep",
     "link": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/overview?tabs=bicep",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -589,9 +468,7 @@
     "ring": 0,
     "label": "Terraform",
     "link": "https://developer.hashicorp.com/terraform",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -599,9 +476,7 @@
     "ring": 3,
     "label": "ARM Templates",
     "link": "https://learn.microsoft.com/en-us/azure/azure-resource-manager/templates/overview",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -609,9 +484,7 @@
     "ring": 2,
     "label": "Pulumi",
     "link": "https://www.pulumi.com/",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -619,9 +492,7 @@
     "ring": 2,
     "label": "NUKE Build",
     "link": "https://nuke.build//",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -629,9 +500,7 @@
     "ring": 0,
     "label": "PowerShell",
     "link": "https://learn.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.5",
-    "category": [
-      "Scripting"
-    ],
+    "category": ["Scripting"],
     "status": 1
   },
   {
@@ -639,9 +508,7 @@
     "ring": 3,
     "label": "PowerShell DSC",
     "link": "https://learn.microsoft.com/en-us/powershell/scripting/dsc/overview?view=powershell-7.5",
-    "category": [
-      "Scripting"
-    ],
+    "category": ["Scripting"],
     "status": 1
   },
   {
@@ -649,9 +516,7 @@
     "ring": 0,
     "label": "Python",
     "link": "https://www.python.org/",
-    "category": [
-      "Scripting"
-    ],
+    "category": ["Scripting"],
     "status": 1
   },
   {
@@ -659,9 +524,7 @@
     "ring": 1,
     "label": "Trunk-based Development",
     "link": "https://trunkbaseddevelopment.com/",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -669,9 +532,7 @@
     "ring": 0,
     "label": "GitHub CLI",
     "link": "https://cli.github.com/",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -679,9 +540,7 @@
     "ring": 1,
     "label": "Feature Flags",
     "link": "https://launchdarkly.com/blog/what-are-feature-flags/",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -689,9 +548,7 @@
     "ring": 2,
     "label": "Chaos Engineering",
     "link": "https://en.wikipedia.org/wiki/Chaos_engineering",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -699,9 +556,7 @@
     "ring": 3,
     "label": "Manual deployments",
     "link": "",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -709,9 +564,7 @@
     "ring": 3,
     "label": "Siloed Dev and Ops",
     "link": "",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -719,9 +572,7 @@
     "ring": 0,
     "label": "Azure Boards",
     "link": "https://azure.microsoft.com/en-us/products/devops/boards",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -729,9 +580,7 @@
     "ring": 0,
     "label": "GitHub Issues",
     "link": "https://github.com/features/issues",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -739,9 +588,7 @@
     "ring": 1,
     "label": "GitHub Projects",
     "link": "https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -749,9 +596,7 @@
     "ring": 0,
     "label": "Azure Artifacts",
     "link": "https://azure.microsoft.com/en-us/products/devops/artifacts",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -759,9 +604,7 @@
     "ring": 1,
     "label": "Playwright",
     "link": "https://playwright.dev/",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -769,9 +612,7 @@
     "ring": 1,
     "label": "GitHub Advanced Security",
     "link": "https://github.com/security/advanced-security",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   },
   {
@@ -779,9 +620,7 @@
     "ring": 1,
     "label": "GitHub Advanced Security for Azure DevOps",
     "link": "https://azure.microsoft.com/en-us/products/devops/github-advanced-security",
-    "category": [
-      "DevOps"
-    ],
+    "category": ["DevOps"],
     "status": 1
   }
 ]
