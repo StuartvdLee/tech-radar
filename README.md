@@ -34,6 +34,10 @@ Open de [Sopra Steria ALMTech Radar](https://www.almtech-radar.nl/) in een webbr
 3. **Architectuur & Cultuur** (kwadrant 2) - Methodologieën en architectuurpatronen
 4. **Ondersteuning & Tools** (kwadrant 3) - Ontwikkel- en productietools
 
+### Lokaal
+
+Als je [index.html](index.html) lokaal opent, dan wordt de radar niet ingeladen. Om dit te doen, installeer je de [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension in VS Code. Vervolgens kun je in de Verkenner met de rechtermuisknop op [index.html](index.html) klikken en _Show Preview_ selecteren. Dit start een lokale server binnen VS Code waardoor je wijzigingen aan de inhoud van de radar direct kunt bekijken in VS Code of in een web browser.
+
 ## Versies
 
 Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
