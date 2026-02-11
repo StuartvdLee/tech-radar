@@ -93,6 +93,8 @@ jobs:
           destination: /opt/gh-aw/actions
       - name: Create gh-aw temp directory
         run: bash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh
+      - name: Checkout repository
+        uses: actions/checkout@v5
       - name: Configure Git credentials
         env:
           REPO_NAME: ${{ github.repository }}
