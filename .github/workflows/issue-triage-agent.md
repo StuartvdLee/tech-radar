@@ -5,7 +5,8 @@ on:
 permissions:
   issues: read
 imports:
-- github/gh-aw/.github/workflows/shared/reporting.md@94662b1dee8ce96c876ba9f33b3ab8be32de82a4
+- github/gh-aw/.github/workflows/shared/mood.md@ab43451fcdaecb07e55df4cdf45ceb9490c69242
+- github/gh-aw/.github/workflows/shared/reporting.md@ab43451fcdaecb07e55df4cdf45ceb9490c69242
 safe-outputs:
   add-comment: {}
   add-labels:
@@ -17,11 +18,12 @@ safe-outputs:
     - question
     - help-wanted
     - good-first-issue
-source: github/gh-aw/.github/workflows/issue-triage-agent.md@94662b1dee8ce96c876ba9f33b3ab8be32de82a4
+source: github/gh-aw/.github/workflows/issue-triage-agent.md@ab43451fcdaecb07e55df4cdf45ceb9490c69242
 strict: true
 timeout-minutes: 5
 tools:
   github:
+    lockdown: true
     toolsets:
     - issues
     - labels
