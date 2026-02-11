@@ -93,19 +93,17 @@ jobs:
           destination: /opt/gh-aw/actions
       - name: Create gh-aw temp directory
         run: bash /opt/gh-aw/actions/create_gh_aw_tmp_dir.sh
-      # NOTE: Git configuration step removed - not needed for issue triage workflow
-      # which only reads issues and adds labels/comments without modifying repository code
-      # - name: Configure Git credentials
-      #   env:
-      #     REPO_NAME: ${{ github.repository }}
-      #     SERVER_URL: ${{ github.server_url }}
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     # Re-authenticate git with GitHub token
-      #     SERVER_URL_STRIPPED="${SERVER_URL#https://}"
-      #     git remote set-url origin "https://x-access-token:${{ github.token }}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
-      #     echo "Git configured with standard GitHub Actions identity"
+      - name: Configure Git credentials
+        env:
+          REPO_NAME: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          # Re-authenticate git with GitHub token
+          SERVER_URL_STRIPPED="${SERVER_URL#https://}"
+          git remote set-url origin "https://x-access-token:${{ github.token }}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
+          echo "Git configured with standard GitHub Actions identity"
       - name: Generate agentic run info
         id: generate_aw_info
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
@@ -581,9 +579,8 @@ jobs:
         env:
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
         run: bash /opt/gh-aw/actions/print_prompt_summary.sh
-      # NOTE: Clean git credentials step removed - not needed since git configuration was removed
-      # - name: Clean git credentials
-      #   run: bash /opt/gh-aw/actions/clean_git_credentials.sh
+      - name: Clean git credentials
+        run: bash /opt/gh-aw/actions/clean_git_credentials.sh
       - name: Execute GitHub Copilot CLI
         id: agentic_execution
         # Copilot CLI tool arguments (sorted):
@@ -605,19 +602,17 @@ jobs:
           GITHUB_STEP_SUMMARY: ${{ env.GITHUB_STEP_SUMMARY }}
           GITHUB_WORKSPACE: ${{ github.workspace }}
           XDG_CONFIG_HOME: /home/runner
-      # NOTE: Git configuration step removed - not needed for issue triage workflow
-      # which only reads issues and adds labels/comments without modifying repository code
-      # - name: Configure Git credentials
-      #   env:
-      #     REPO_NAME: ${{ github.repository }}
-      #     SERVER_URL: ${{ github.server_url }}
-      #   run: |
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git config --global user.name "github-actions[bot]"
-      #     # Re-authenticate git with GitHub token
-      #     SERVER_URL_STRIPPED="${SERVER_URL#https://}"
-      #     git remote set-url origin "https://x-access-token:${{ github.token }}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
-      #     echo "Git configured with standard GitHub Actions identity"
+      - name: Configure Git credentials
+        env:
+          REPO_NAME: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          # Re-authenticate git with GitHub token
+          SERVER_URL_STRIPPED="${SERVER_URL#https://}"
+          git remote set-url origin "https://x-access-token:${{ github.token }}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
+          echo "Git configured with standard GitHub Actions identity"
       - name: Copy Copilot session state files to logs
         if: always()
         continue-on-error: true
