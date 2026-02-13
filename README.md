@@ -38,6 +38,23 @@ Open de [Sopra Steria ALMTech Radar](https://www.almtech-radar.nl/) in een webbr
 
 Als je [index.html](index.html) lokaal opent, dan wordt de radar niet ingeladen. Om dit te doen, installeer je de [Live Preview](https://marketplace.visualstudio.com/items?itemName=ms-vscode.live-server) extension in VS Code. Vervolgens kun je in de Verkenner met de rechtermuisknop op [index.html](index.html) klikken en _Show Preview_ selecteren. Dit start een lokale server binnen VS Code waardoor je wijzigingen aan de inhoud van de radar direct kunt bekijken in VS Code of in een web browser.
 
+## Preview Environments
+
+Voor elke pull request wordt automatisch een preview environment aangemaakt via Azure Static Web Apps. Dit stelt reviewers in staat om wijzigingen visueel te controleren voordat ze worden samengevoegd met de main branch.
+
+### Hoe werkt het?
+
+1. **Pull Request Aanmaken**: Wanneer je een pull request aanmaakt, wordt automatisch een preview environment gedeployed
+2. **Preview URL**: De Azure Static Web Apps GitHub Action plaatst automatisch een commentaar op de pull request met de preview URL
+3. **Updates**: Bij elke nieuwe commit naar de pull request branch wordt de preview environment automatisch bijgewerkt
+4. **Opruimen**: Wanneer de pull request wordt gesloten of samengevoegd, wordt de preview environment automatisch verwijderd
+
+### Voordelen
+
+- **Visuele Verificatie**: Reviewers kunnen wijzigingen aan de radar direct in hun browser bekijken
+- **Isolatie**: Elke PR heeft zijn eigen omgeving, zonder impact op productie
+- **Automatisch**: Geen handmatige stappen nodig voor deployment of cleanup
+
 ## Versies
 
 Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
