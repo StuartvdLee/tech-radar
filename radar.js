@@ -317,7 +317,7 @@ function radar_visualization(config) {
         // footer
         radar.append("text")
             .attr("transform", translate(footer_offset.x, footer_offset.y))
-            .text("■ nieuw ▲ verplaatst ● Onveranderd")
+            .text("■ Nieuw ▲ Verplaatst ● Onveranderd")
             .attr("xml:space", "preserve")
             .style("font-family", "Raleway")
             .style("font-size", "14px")
