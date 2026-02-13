@@ -290,6 +290,10 @@ function radar_visualization(config) {
 
     // Function to truncate text with ellipsis for SVG
     function truncateText(text, maxLength) {
+        // Ensure maxLength is at least 4 to accommodate "..." and at least one character
+        if (maxLength < 4) {
+            maxLength = 4;
+        }
         if (text.length > maxLength) {
             return text.substring(0, maxLength - 3) + '...';
         }
@@ -433,14 +437,14 @@ function radar_visualization(config) {
     }
 
     function highlightLegendItem(d) {
-        var legendItem = document.getElementById("legendItem" + d.id);
-        legendItem.setAttribute("filter", "url(#solid)");
-        legendItem.setAttribute("fill", config.colors.background);
+        var legendItem = d3.select("#legendItem" + d.id);
+        legendItem.attr("filter", "url(#solid)");
+        legendItem.attr("fill", config.colors.background);
         
         // Show full text on hover
-        var fullText = legendItem.getAttribute("data-full-text");
+        var fullText = legendItem.attr("data-full-text");
         if (fullText) {
-            legendItem.textContent = fullText;
+            legendItem.text(fullText);
         }
         
         // Dim other items in the same quadrant using specific class selector for better performance
@@ -458,14 +462,14 @@ function radar_visualization(config) {
     }
 
     function unhighlightLegendItem(d) {
-        var legendItem = document.getElementById("legendItem" + d.id);
-        legendItem.removeAttribute("filter");
-        legendItem.setAttribute("fill", config.colors.text);
+        var legendItem = d3.select("#legendItem" + d.id);
+        legendItem.attr("filter", null);
+        legendItem.attr("fill", config.colors.text);
         
         // Restore truncated text
-        var truncatedText = legendItem.getAttribute("data-truncated-text");
+        var truncatedText = legendItem.attr("data-truncated-text");
         if (truncatedText) {
-            legendItem.textContent = truncatedText;
+            legendItem.text(truncatedText);
         }
         
         // Restore opacity only for items in the same quadrant (consistent with highlight logic)
