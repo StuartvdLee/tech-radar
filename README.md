@@ -25,7 +25,7 @@ Deze repository bevat:
 - **Versie Geschiedenis**: Alle vorige versies van de Tech Radar zijn beschikbaar in de [Changelog](https://www.almtech-radar.nl/changelog.html)
 - **Changelog**: Overzicht van wijzigingen tussen versies
 
-- ## Versies
+## Versies
 
 Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
 
