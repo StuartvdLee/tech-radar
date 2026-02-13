@@ -19,6 +19,7 @@ function radar_visualization(config) {
     config.svg_id = "radar";
     config.width = 1450;
     config.height = 900;
+    config.legend_text_max_length = 26; // Maximum characters for legend text before truncation
     config.colors = {
         background: style.getPropertyValue('--kleur-achtergrond'),
         text: style.getPropertyValue('--kleur-tekst'),
@@ -41,6 +42,7 @@ function radar_visualization(config) {
         { name: "Onderzoek", color: config.colors.onderzoek, textColor: "white" },
         { name: "Verminder", color: config.colors.verminder, textColor: "white" }
     ];
+    config.num_rings = config.rings.length; // Number of rings (for iteration)
     config.print_layout = true;
     config.links_in_new_tabs = true;
 
@@ -286,6 +288,20 @@ function radar_visualization(config) {
         );
     }
 
+    // Function to truncate text with ellipsis for SVG
+    function truncateText(text, maxLength) {
+        // Handle null/undefined input
+        if (!text) return '';
+        // Ensure maxLength is at least 4 to accommodate "..." and at least one character
+        if (maxLength < 4) {
+            maxLength = 4;
+        }
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength - 3) + '...';
+        }
+        return text;
+    }
+
     // draw title and legend (only in print layout)
     if (config.print_layout) {
 
@@ -321,11 +337,11 @@ function radar_visualization(config) {
                 .style("font-size", "20px")
                 .style("font-weight", "900")
                 .style("fill", config.colors.text);
-            for (var ring = 0; ring < 4; ring++) {
+            for (var ring = 0; ring < config.num_rings; ring++) {
                 legend.append("text")
                     .attr("transform", legend_transform(quadrant, ring))
                     .text(config.rings[ring].name)
-                    .attr("class", "legend-ring-name")
+                    .attr("class", "legend-ring-name legend-ring-name-q" + quadrant)
                     .style("font-family", "Raleway")
                     .style("font-size", "12px")
                     .style("font-weight", "bold")
@@ -355,7 +371,16 @@ function radar_visualization(config) {
                     .attr("transform", function (d, i) { return legend_transform(quadrant, ring, i); })
                     .attr("class", "legend" + quadrant + ring + " legend-item")
                     .attr("id", function (d, i) { return "legendItem" + d.id; })
-                    .text(function (d, i) { return d.id + ". " + d.label; })
+                    .each(function(d, i) {
+                        var fullText = d.id + ". " + d.label;
+                        var truncatedText = truncateText(fullText, config.legend_text_max_length);
+                        
+                        // Store both full and truncated text as data attributes
+                        d3.select(this)
+                            .attr("data-full-text", fullText)
+                            .attr("data-truncated-text", truncatedText)
+                            .text(truncatedText);
+                    })
                     .style("font-family", "Raleway")
                     .style("font-size", "11px")
                     .attr("fill", config.colors.text)
@@ -414,15 +439,52 @@ function radar_visualization(config) {
     }
 
     function highlightLegendItem(d) {
-        var legendItem = document.getElementById("legendItem" + d.id);
-        legendItem.setAttribute("filter", "url(#solid)");
-        legendItem.setAttribute("fill", config.colors.background);
+        var legendItem = d3.select("#legendItem" + d.id);
+        legendItem.attr("filter", "url(#solid)");
+        legendItem.attr("fill", config.colors.background);
+        
+        // Show full text on hover
+        var fullText = legendItem.attr("data-full-text");
+        if (fullText) {
+            legendItem.text(fullText);
+        }
+        
+        // Dim other items in the same quadrant using specific class selector for better performance
+        var currentQuadrant = d.quadrant;
+        // Select all items in the same quadrant (legend items have class like "legend00", "legend01", etc.)
+        for (var ring = 0; ring < config.num_rings; ring++) {
+            d3.selectAll(".legend" + currentQuadrant + ring).each(function(itemData) {
+                var item = d3.select(this);
+                // Dim items that are not the hovered item
+                if (itemData && itemData.id !== d.id) {
+                    item.style("opacity", 0.3);
+                }
+            });
+        }
+        
+        // Dim ring headers in the same quadrant
+        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 0.3);
     }
 
     function unhighlightLegendItem(d) {
-        var legendItem = document.getElementById("legendItem" + d.id);
-        legendItem.removeAttribute("filter");
-        legendItem.setAttribute("fill", config.colors.text);
+        var legendItem = d3.select("#legendItem" + d.id);
+        legendItem.attr("filter", null);
+        legendItem.attr("fill", config.colors.text);
+        
+        // Restore truncated text
+        var truncatedText = legendItem.attr("data-truncated-text");
+        if (truncatedText) {
+            legendItem.text(truncatedText);
+        }
+        
+        // Restore opacity only for items in the same quadrant (consistent with highlight logic)
+        var currentQuadrant = d.quadrant;
+        for (var ring = 0; ring < config.num_rings; ring++) {
+            d3.selectAll(".legend" + currentQuadrant + ring).style("opacity", 1);
+        }
+        
+        // Restore ring headers opacity in the same quadrant
+        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 1);
     }
 
     // draw blips on radar
