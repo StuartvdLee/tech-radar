@@ -42,6 +42,7 @@ function radar_visualization(config) {
         { name: "Onderzoek", color: config.colors.onderzoek, textColor: "white" },
         { name: "Verminder", color: config.colors.verminder, textColor: "white" }
     ];
+    config.num_rings = config.rings.length; // Number of rings (for iteration)
     config.print_layout = true;
     config.links_in_new_tabs = true;
 
@@ -445,7 +446,7 @@ function radar_visualization(config) {
         // Dim other items in the same quadrant using specific class selector for better performance
         var currentQuadrant = d.quadrant;
         // Select all items in the same quadrant (legend items have class like "legend00", "legend01", etc.)
-        for (var ring = 0; ring < 4; ring++) {
+        for (var ring = 0; ring < config.num_rings; ring++) {
             d3.selectAll(".legend" + currentQuadrant + ring).each(function(itemData) {
                 var item = d3.select(this);
                 // Dim items that are not the hovered item
@@ -467,8 +468,11 @@ function radar_visualization(config) {
             legendItem.textContent = truncatedText;
         }
         
-        // Restore opacity for all items
-        d3.selectAll(".legend-item").style("opacity", 1);
+        // Restore opacity only for items in the same quadrant (consistent with highlight logic)
+        var currentQuadrant = d.quadrant;
+        for (var ring = 0; ring < config.num_rings; ring++) {
+            d3.selectAll(".legend" + currentQuadrant + ring).style("opacity", 1);
+        }
     }
 
     // draw blips on radar
