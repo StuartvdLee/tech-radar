@@ -19,6 +19,7 @@ function radar_visualization(config) {
     config.svg_id = "radar";
     config.width = 1450;
     config.height = 900;
+    config.legend_text_max_length = 18; // Maximum characters for legend text before truncation
     config.colors = {
         background: style.getPropertyValue('--kleur-achtergrond'),
         text: style.getPropertyValue('--kleur-tekst'),
@@ -365,7 +366,7 @@ function radar_visualization(config) {
                     .attr("id", function (d, i) { return "legendItem" + d.id; })
                     .each(function(d, i) {
                         var fullText = d.id + ". " + d.label;
-                        var truncatedText = d.id + ". " + truncateText(d.label, 18);
+                        var truncatedText = d.id + ". " + truncateText(d.label, config.legend_text_max_length);
                         
                         // Store both full and truncated text as data attributes
                         d3.select(this)
@@ -442,10 +443,11 @@ function radar_visualization(config) {
         }
         
         // Dim other items in the same quadrant
-        var quadrantClass = "legend" + d.quadrant;
-        d3.selectAll(".legend-item").each(function() {
+        var currentQuadrant = d.quadrant;
+        d3.selectAll(".legend-item").each(function(itemData) {
             var item = d3.select(this);
-            if (item.attr("class").includes(quadrantClass) && item.attr("id") !== "legendItem" + d.id) {
+            // Check if this item is in the same quadrant but is not the hovered item
+            if (itemData && itemData.quadrant === currentQuadrant && itemData.id !== d.id) {
                 item.style("opacity", 0.3);
             }
         });
