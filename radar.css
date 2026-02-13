@@ -85,6 +85,11 @@ a {
     color: var(--kleur-accent);
 }
 
+/* Make blip links clearly clickable */
+.blip a {
+    cursor: pointer;
+}
+
 .center-box {
     display: flex;
     justify-content: center;

@@ -52,7 +52,7 @@ function radar_visualization(config) {
         if (announcer) {
             announcer.textContent = '';
             // Small delay to ensure screen readers pick up the change
-            setTimeout(function() {
+            setTimeout(function () {
                 announcer.textContent = message;
             }, 100);
         }
@@ -397,10 +397,10 @@ function radar_visualization(config) {
                     .attr("id", function (d, i) { return "legendItem" + d.id; })
                     .attr("tabindex", "0")
                     .attr("role", "button")
-                    .each(function(d, i) {
+                    .each(function (d, i) {
                         var fullText = d.id + ". " + d.label;
                         var truncatedText = truncateText(fullText, config.legend_text_max_length);
-                        
+
                         // Store both full and truncated text as data attributes
                         d3.select(this)
                             .attr("data-full-text", fullText)
@@ -414,7 +414,7 @@ function radar_visualization(config) {
                     .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); })
                     .on("focus", function (d) { showBubble(d); highlightLegendItem(d); })
                     .on("blur", function (d) { hideBubble(d); unhighlightLegendItem(d); })
-                    .on("keydown", function(d) {
+                    .on("keydown", function (d) {
                         // Handle Enter and Space key for activation
                         if (d3.event.keyCode === 13 || d3.event.keyCode === 32) {
                             d3.event.preventDefault();
@@ -483,18 +483,18 @@ function radar_visualization(config) {
         var legendItem = d3.select("#legendItem" + d.id);
         legendItem.attr("filter", "url(#solid)");
         legendItem.attr("fill", config.colors.background);
-        
+
         // Show full text on hover
         var fullText = legendItem.attr("data-full-text");
         if (fullText) {
             legendItem.text(fullText);
         }
-        
+
         // Dim other items in the same quadrant using specific class selector for better performance
         var currentQuadrant = d.quadrant;
         // Select all items in the same quadrant (legend items have class like "legend00", "legend01", etc.)
         for (var ring = 0; ring < config.num_rings; ring++) {
-            d3.selectAll(".legend" + currentQuadrant + ring).each(function(itemData) {
+            d3.selectAll(".legend" + currentQuadrant + ring).each(function (itemData) {
                 var item = d3.select(this);
                 // Dim items that are not the hovered item
                 if (itemData && itemData.id !== d.id) {
@@ -502,7 +502,7 @@ function radar_visualization(config) {
                 }
             });
         }
-        
+
         // Dim ring headers in the same quadrant
         d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 0.3);
     }
@@ -511,19 +511,19 @@ function radar_visualization(config) {
         var legendItem = d3.select("#legendItem" + d.id);
         legendItem.attr("filter", null);
         legendItem.attr("fill", config.colors.text);
-        
+
         // Restore truncated text
         var truncatedText = legendItem.attr("data-truncated-text");
         if (truncatedText) {
             legendItem.text(truncatedText);
         }
-        
+
         // Restore opacity only for items in the same quadrant (consistent with highlight logic)
         var currentQuadrant = d.quadrant;
         for (var ring = 0; ring < config.num_rings; ring++) {
             d3.selectAll(".legend" + currentQuadrant + ring).style("opacity", 1);
         }
-        
+
         // Restore ring headers opacity in the same quadrant
         d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 1);
     }
@@ -534,10 +534,10 @@ function radar_visualization(config) {
         .enter()
         .append("g")
         .attr("class", "blip")
-        .attr("transform", function (d, i) { return legend_transform(d.quadrant, d.ring, i); })
+        .attr("transform", function (d) { return translate(d.x, d.y); })
         .attr("tabindex", "0")
         .attr("role", "button")
-        .attr("aria-label", function(d) {
+        .attr("aria-label", function (d) {
             var ringName = config.rings[d.ring].name;
             var quadrantName = config.quadrants[d.quadrant].name;
             var statusText = d.status === 1 ? " (nieuw)" : d.status === 2 ? " (verplaatst)" : " (onveranderd)";
@@ -547,7 +547,7 @@ function radar_visualization(config) {
         .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); })
         .on("focus", function (d) { showBubble(d); highlightLegendItem(d); })
         .on("blur", function (d) { hideBubble(d); unhighlightLegendItem(d); })
-        .on("keydown", function(d) {
+        .on("keydown", function (d) {
             // Handle Enter and Space key for activation
             if (d3.event.keyCode === 13 || d3.event.keyCode === 32) {
                 d3.event.preventDefault();
@@ -565,11 +565,12 @@ function radar_visualization(config) {
     blips.each(function (d) {
         var blip = d3.select(this);
 
-        // blip link
-        if (d.active && d.hasOwnProperty("link") && d.link) {
+        // blip link - make all blips with links clickable
+        if (d.hasOwnProperty("link") && d.link) {
             blip = blip.append("a")
                 .attr("xlink:href", d.link)
-                .attr("rel", config.links_in_new_tabs ? "noopener noreferrer" : null);
+                .attr("rel", config.links_in_new_tabs ? "noopener noreferrer" : null)
+                .style("cursor", "pointer");
 
             if (config.links_in_new_tabs) {
                 blip.attr("target", "_blank");
