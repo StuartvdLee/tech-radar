@@ -493,7 +493,7 @@ function radar_visualization(config) {
         .enter()
         .append("g")
         .attr("class", "blip")
-        .attr("transform", function (d, i) { return legend_transform(d.quadrant, d.ring, i); })
+        .attr("transform", function (d) { return translate(d.x, d.y); })
         .on("mouseover", function (d) { showBubble(d); highlightLegendItem(d); })
         .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); });
 
@@ -501,10 +501,11 @@ function radar_visualization(config) {
     blips.each(function (d) {
         var blip = d3.select(this);
 
-        // blip link
-        if (d.active && d.hasOwnProperty("link") && d.link) {
+        // blip link - make all blips with links clickable
+        if (d.hasOwnProperty("link") && d.link) {
             blip = blip.append("a")
-                .attr("xlink:href", d.link);
+                .attr("xlink:href", d.link)
+                .style("cursor", "pointer");
 
             if (config.links_in_new_tabs) {
                 blip.attr("target", "_blank");
