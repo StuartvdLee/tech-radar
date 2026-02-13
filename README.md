@@ -40,9 +40,20 @@ Als je [index.html](index.html) lokaal opent, dan wordt de radar niet ingeladen.
 
 ## Preview Environments
 
-Voor elke pull request wordt automatisch een preview environment aangemaakt. Dit stelt reviewers in staat om wijzigingen visueel te controleren voordat ze worden samengevoegd met de main branch. De preview URL wordt automatisch als commentaar toegevoegd aan de pull request door de Azure Static Web Apps GitHub Action.
+Voor elke pull request wordt automatisch een preview environment aangemaakt via Azure Static Web Apps. Dit stelt reviewers in staat om wijzigingen visueel te controleren voordat ze worden samengevoegd met de main branch.
 
-Wanneer een pull request wordt gesloten of samengevoegd, wordt de bijbehorende preview environment automatisch opgeruimd.
+### Hoe werkt het?
+
+1. **Pull Request Aanmaken**: Wanneer je een pull request aanmaakt, wordt automatisch een preview environment gedeployed
+2. **Preview URL**: De Azure Static Web Apps GitHub Action plaatst automatisch een commentaar op de pull request met de preview URL
+3. **Updates**: Bij elke nieuwe commit naar de pull request branch wordt de preview environment automatisch bijgewerkt
+4. **Opruimen**: Wanneer de pull request wordt gesloten of samengevoegd, wordt de preview environment automatisch verwijderd
+
+### Voordelen
+
+- **Visuele Verificatie**: Reviewers kunnen wijzigingen aan de radar direct in hun browser bekijken
+- **Isolatie**: Elke PR heeft zijn eigen omgeving, zonder impact op productie
+- **Automatisch**: Geen handmatige stappen nodig voor deployment of cleanup
 
 ## Versies
 
