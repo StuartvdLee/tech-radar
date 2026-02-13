@@ -290,6 +290,8 @@ function radar_visualization(config) {
 
     // Function to truncate text with ellipsis for SVG
     function truncateText(text, maxLength) {
+        // Handle null/undefined input
+        if (!text) return text || '';
         // Ensure maxLength is at least 4 to accommodate "..." and at least one character
         if (maxLength < 4) {
             maxLength = 4;
@@ -335,7 +337,7 @@ function radar_visualization(config) {
                 .style("font-size", "20px")
                 .style("font-weight", "900")
                 .style("fill", config.colors.text);
-            for (var ring = 0; ring < 4; ring++) {
+            for (var ring = 0; ring < config.num_rings; ring++) {
                 legend.append("text")
                     .attr("transform", legend_transform(quadrant, ring))
                     .text(config.rings[ring].name)
@@ -461,7 +463,7 @@ function radar_visualization(config) {
         }
         
         // Dim ring headers in the same quadrant
-        d3.selectAll(`.legend-ring-name-q${currentQuadrant}`).style("opacity", 0.3);
+        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 0.3);
     }
 
     function unhighlightLegendItem(d) {
@@ -482,7 +484,7 @@ function radar_visualization(config) {
         }
         
         // Restore ring headers opacity in the same quadrant
-        d3.selectAll(`.legend-ring-name-q${currentQuadrant}`).style("opacity", 1);
+        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 1);
     }
 
     // draw blips on radar
