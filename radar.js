@@ -286,6 +286,14 @@ function radar_visualization(config) {
         );
     }
 
+    // Function to truncate text with ellipsis for SVG
+    function truncateText(text, maxLength) {
+        if (text.length > maxLength) {
+            return text.substring(0, maxLength) + '...';
+        }
+        return text;
+    }
+
     // draw title and legend (only in print layout)
     if (config.print_layout) {
 
@@ -355,7 +363,16 @@ function radar_visualization(config) {
                     .attr("transform", function (d, i) { return legend_transform(quadrant, ring, i); })
                     .attr("class", "legend" + quadrant + ring + " legend-item")
                     .attr("id", function (d, i) { return "legendItem" + d.id; })
-                    .text(function (d, i) { return d.id + ". " + d.label; })
+                    .each(function(d, i) {
+                        var fullText = d.id + ". " + d.label;
+                        var truncatedText = d.id + ". " + truncateText(d.label, 18);
+                        
+                        // Store both full and truncated text as data attributes
+                        d3.select(this)
+                            .attr("data-full-text", fullText)
+                            .attr("data-truncated-text", truncatedText)
+                            .text(truncatedText);
+                    })
                     .style("font-family", "Raleway")
                     .style("font-size", "11px")
                     .attr("fill", config.colors.text)
@@ -417,12 +434,36 @@ function radar_visualization(config) {
         var legendItem = document.getElementById("legendItem" + d.id);
         legendItem.setAttribute("filter", "url(#solid)");
         legendItem.setAttribute("fill", config.colors.background);
+        
+        // Show full text on hover
+        var fullText = legendItem.getAttribute("data-full-text");
+        if (fullText) {
+            legendItem.textContent = fullText;
+        }
+        
+        // Dim other items in the same quadrant
+        var quadrantClass = "legend" + d.quadrant;
+        d3.selectAll(".legend-item").each(function() {
+            var item = d3.select(this);
+            if (item.attr("class").includes(quadrantClass) && item.attr("id") !== "legendItem" + d.id) {
+                item.style("opacity", 0.3);
+            }
+        });
     }
 
     function unhighlightLegendItem(d) {
         var legendItem = document.getElementById("legendItem" + d.id);
         legendItem.removeAttribute("filter");
         legendItem.setAttribute("fill", config.colors.text);
+        
+        // Restore truncated text
+        var truncatedText = legendItem.getAttribute("data-truncated-text");
+        if (truncatedText) {
+            legendItem.textContent = truncatedText;
+        }
+        
+        // Restore opacity for all items
+        d3.selectAll(".legend-item").style("opacity", 1);
     }
 
     // draw blips on radar
