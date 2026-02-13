@@ -339,7 +339,7 @@ function radar_visualization(config) {
                 legend.append("text")
                     .attr("transform", legend_transform(quadrant, ring))
                     .text(config.rings[ring].name)
-                    .attr("class", "legend-ring-name legend-ring-name-q" + quadrant)
+                    .attr("class", `legend-ring-name legend-ring-name-q${quadrant}`)
                     .style("font-family", "Raleway")
                     .style("font-size", "12px")
                     .style("font-weight", "bold")
@@ -461,7 +461,7 @@ function radar_visualization(config) {
         }
         
         // Dim ring headers in the same quadrant
-        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 0.3);
+        d3.selectAll(`.legend-ring-name-q${currentQuadrant}`).style("opacity", 0.3);
     }
 
     function unhighlightLegendItem(d) {
@@ -482,7 +482,7 @@ function radar_visualization(config) {
         }
         
         // Restore ring headers opacity in the same quadrant
-        d3.selectAll(".legend-ring-name-q" + currentQuadrant).style("opacity", 1);
+        d3.selectAll(`.legend-ring-name-q${currentQuadrant}`).style("opacity", 1);
     }
 
     // draw blips on radar
