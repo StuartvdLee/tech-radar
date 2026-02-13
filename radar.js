@@ -339,7 +339,7 @@ function radar_visualization(config) {
                 legend.append("text")
                     .attr("transform", legend_transform(quadrant, ring))
                     .text(config.rings[ring].name)
-                    .attr("class", `legend-ring-name legend-ring-name-q${quadrant}`)
+                    .attr("class", "legend-ring-name legend-ring-name-q" + quadrant)
                     .style("font-family", "Raleway")
                     .style("font-size", "12px")
                     .style("font-weight", "bold")
