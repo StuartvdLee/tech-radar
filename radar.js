@@ -291,7 +291,7 @@ function radar_visualization(config) {
     // Function to truncate text with ellipsis for SVG
     function truncateText(text, maxLength) {
         // Handle null/undefined input
-        if (!text) return text || '';
+        if (!text) return '';
         // Ensure maxLength is at least 4 to accommodate "..." and at least one character
         if (maxLength < 4) {
             maxLength = 4;
