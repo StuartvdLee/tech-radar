@@ -10,6 +10,52 @@
     --kleur-verminder: #DB1D2B;
 }
 
+/* Accessibility: Skip link */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--kleur-onderzoek);
+    color: var(--kleur-tekst);
+    padding: 8px 16px;
+    text-decoration: none;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+/* Accessibility: Screen reader only content */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Accessibility: Focus indicators */
+a:focus,
+button:focus,
+details summary:focus {
+    outline: 3px solid var(--kleur-onderzoek);
+    outline-offset: 2px;
+}
+
+/* Accessibility: Focus for SVG interactive elements */
+#radar a:focus,
+#radar .blip:focus,
+#radar .legend-item:focus {
+    outline: 3px solid var(--kleur-onderzoek);
+    outline-offset: 2px;
+}
+
 body {
     font-family: 'Raleway';
     padding-top: 10px;
@@ -193,12 +239,18 @@ a {
 
 .mobile-lists a {
     display: block;
-    padding: 4px 0;
+    padding: 12px 8px;
     text-decoration: none;
+    min-height: 44px;
+    line-height: 1.4;
 }
 
-.mobile-lists a:hover {
+.mobile-lists a:hover,
+.mobile-lists a:focus {
     text-decoration: underline;
+    background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid var(--kleur-onderzoek);
+    outline-offset: 2px;
 }
 
 /* Switch to list view on phones */

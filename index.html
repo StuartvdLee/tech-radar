@@ -29,7 +29,7 @@ Kleuren:
 -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 
 <head>
 
@@ -51,15 +51,22 @@ Kleuren:
 
 <body>
 
-    <div class="center-box header-box">
+    <a href="#main-content" class="skip-link">Ga naar hoofdinhoud</a>
+
+    <header class="center-box header-box">
         <a href="https://www.soprasteria.nl/">
             <img src="sopra-steria-logo.svg" alt="Sopra Steria logo">
         </a>
         <h1>ALMTech Radar</h1>
-    </div>
+    </header>
 
-    <svg id="radar" style="display: block; margin: auto"></svg>
-    <div id="mobile-lists" class="mobile-lists"></div>
+    <main id="main-content">
+        <div id="aria-announcer" aria-live="polite" aria-atomic="true" class="sr-only"></div>
+        <svg id="radar" role="img" aria-label="Tech Radar visualisatie: Een interactieve radar met technologieën georganiseerd in vier kwadranten en vier ringen" style="display: block; margin: auto">
+            <title>Sopra Steria ALMTech Radar</title>
+            <desc>Een visuele weergave van technologieën georganiseerd in vier kwadranten (Infrastructuur & Platformen, Talen & Frameworks, Architectuur & Cultuur, en Ondersteuning & Tools) en vier ringen (Gebruik, Probeer, Onderzoek, en Verminder). Elke technologie wordt weergegeven als een punt op de radar met een nummer dat overeenkomt met een item in de legenda.</desc>
+        </svg>
+        <div id="mobile-lists" class="mobile-lists"></div>
 
     <script>
         fetch("/versions/versions.json")
@@ -108,24 +115,39 @@ Kleuren:
                             ];
 
                             const ringClass = ['ring-gebruik', 'ring-probeer', 'ring-onderzoek', 'ring-verminder'];
+                            const ringNames = ['Gebruik', 'Probeer', 'Onderzoek', 'Verminder'];
+                            const statusLabels = ['onveranderd', 'nieuw', 'verplaatst'];
 
                             quadrants.forEach((qName, qIndex) => {
                                 const details = document.createElement('details');
                                 const summary = document.createElement('summary');
                                 summary.textContent = qName;
+                                summary.setAttribute('aria-label', qName + ' - Klik om te openen of te sluiten');
                                 details.appendChild(summary);
                                 const ul = document.createElement('ul');
+                                ul.setAttribute('role', 'list');
                                 config.entries
                                     .filter(e => e.quadrant === qIndex && (e.active ?? true))
                                     .sort((a, b) => a.ring - b.ring || a.label.localeCompare(b.label))
                                     .forEach(e => {
                                         const li = document.createElement('li');
+                                        li.setAttribute('role', 'listitem');
                                         const link = document.createElement('a');
+                                        
+                                        // Add ring and status information
+                                        const statusText = e.status ? ` (${statusLabels[e.status]})` : '';
+                                        const ringName = ringNames[e.ring];
                                         link.textContent = e.label;
                                         link.classList.add(ringClass[e.ring]);
                                         link.href = e.link ? e.link : '#';
+                                        
+                                        // Add accessible label with ring and status info
+                                        link.setAttribute('aria-label', `${e.label} - ${ringName}${statusText}`);
+                                        
                                         if (e.link && config.links_in_new_tabs) {
                                             link.target = '_blank';
+                                            link.setAttribute('aria-label', `${e.label} - ${ringName}${statusText} (opent in nieuw tabblad)`);
+                                            link.rel = 'noopener noreferrer';
                                         }
                                         li.appendChild(link);
                                         ul.appendChild(li);
@@ -196,6 +218,7 @@ Kleuren:
             </p>
         </div>
     </div>
+    </main>
 
 </body>
 

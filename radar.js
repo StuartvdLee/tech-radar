@@ -46,6 +46,18 @@ function radar_visualization(config) {
     config.print_layout = true;
     config.links_in_new_tabs = true;
 
+    // Accessibility: Function to announce to screen readers
+    function announceToScreenReader(message) {
+        var announcer = document.getElementById('aria-announcer');
+        if (announcer) {
+            announcer.textContent = '';
+            // Small delay to ensure screen readers pick up the change
+            setTimeout(function() {
+                announcer.textContent = message;
+            }, 100);
+        }
+    }
+
     // custom random number generator, to make random sequence reproducible
     // source: https://stackoverflow.com/questions/521295
     var seed = 42;
@@ -319,6 +331,7 @@ function radar_visualization(config) {
             .attr("transform", translate(footer_offset.x, footer_offset.y))
             .text("■ Nieuw ▲ Verplaatst ● Onveranderd")
             .attr("xml:space", "preserve")
+            .attr("aria-label", "Legenda symbolen: vierkant is nieuw, driehoek is verplaatst, cirkel is onveranderd")
             .style("font-family", "Raleway")
             .style("font-size", "14px")
             .style("fill", config.colors.text);
@@ -357,6 +370,17 @@ function radar_visualization(config) {
                     .attr("target", function (d, i) {
                         return (d.link && config.links_in_new_tabs) ? "_blank" : null;
                     })
+                    // Add rel for security when opening in new tab
+                    .attr("rel", function (d, i) {
+                        return (d.link && config.links_in_new_tabs) ? "noopener noreferrer" : null;
+                    })
+                    // Add ARIA label for screen readers
+                    .attr("aria-label", function (d, i) {
+                        var ringName = config.rings[ring].name;
+                        var statusText = d.status === 1 ? " (nieuw)" : d.status === 2 ? " (verplaatst)" : " (onveranderd)";
+                        var newTabText = (d.link && config.links_in_new_tabs) ? " - opent in nieuw tabblad" : "";
+                        return d.id + ". " + d.label + " - " + ringName + statusText + newTabText;
+                    })
                     // add application insights link clicked event
                     .attr("data-custom-id", function (d, i) {
                         return d.label.replace(/\s+/g, '');
@@ -371,6 +395,8 @@ function radar_visualization(config) {
                     .attr("transform", function (d, i) { return legend_transform(quadrant, ring, i); })
                     .attr("class", "legend" + quadrant + ring + " legend-item")
                     .attr("id", function (d, i) { return "legendItem" + d.id; })
+                    .attr("tabindex", "0")
+                    .attr("role", "button")
                     .each(function(d, i) {
                         var fullText = d.id + ". " + d.label;
                         var truncatedText = truncateText(fullText, config.legend_text_max_length);
@@ -385,7 +411,22 @@ function radar_visualization(config) {
                     .style("font-size", "11px")
                     .attr("fill", config.colors.text)
                     .on("mouseover", function (d) { showBubble(d); highlightLegendItem(d); })
-                    .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); });
+                    .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); })
+                    .on("focus", function (d) { showBubble(d); highlightLegendItem(d); })
+                    .on("blur", function (d) { hideBubble(d); unhighlightLegendItem(d); })
+                    .on("keydown", function(d) {
+                        // Handle Enter and Space key for activation
+                        if (d3.event.keyCode === 13 || d3.event.keyCode === 32) {
+                            d3.event.preventDefault();
+                            if (d.link) {
+                                if (config.links_in_new_tabs) {
+                                    window.open(d.link, '_blank', 'noopener,noreferrer');
+                                } else {
+                                    window.location.href = d.link;
+                                }
+                            }
+                        }
+                    });
             }
         }
     }
@@ -494,8 +535,31 @@ function radar_visualization(config) {
         .append("g")
         .attr("class", "blip")
         .attr("transform", function (d, i) { return legend_transform(d.quadrant, d.ring, i); })
+        .attr("tabindex", "0")
+        .attr("role", "button")
+        .attr("aria-label", function(d) {
+            var ringName = config.rings[d.ring].name;
+            var quadrantName = config.quadrants[d.quadrant].name;
+            var statusText = d.status === 1 ? " (nieuw)" : d.status === 2 ? " (verplaatst)" : " (onveranderd)";
+            return d.id + ". " + d.label + " - " + ringName + " in " + quadrantName + statusText;
+        })
         .on("mouseover", function (d) { showBubble(d); highlightLegendItem(d); })
-        .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); });
+        .on("mouseout", function (d) { hideBubble(d); unhighlightLegendItem(d); })
+        .on("focus", function (d) { showBubble(d); highlightLegendItem(d); })
+        .on("blur", function (d) { hideBubble(d); unhighlightLegendItem(d); })
+        .on("keydown", function(d) {
+            // Handle Enter and Space key for activation
+            if (d3.event.keyCode === 13 || d3.event.keyCode === 32) {
+                d3.event.preventDefault();
+                if (d.link) {
+                    if (config.links_in_new_tabs) {
+                        window.open(d.link, '_blank', 'noopener,noreferrer');
+                    } else {
+                        window.location.href = d.link;
+                    }
+                }
+            }
+        });
 
     // configure each blip
     blips.each(function (d) {
@@ -504,7 +568,8 @@ function radar_visualization(config) {
         // blip link
         if (d.active && d.hasOwnProperty("link") && d.link) {
             blip = blip.append("a")
-                .attr("xlink:href", d.link);
+                .attr("xlink:href", d.link)
+                .attr("rel", config.links_in_new_tabs ? "noopener noreferrer" : null);
 
             if (config.links_in_new_tabs) {
                 blip.attr("target", "_blank");
