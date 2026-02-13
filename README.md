@@ -25,6 +25,14 @@ Deze repository bevat:
 - **Versie Geschiedenis**: Alle vorige versies van de Tech Radar zijn beschikbaar in de [Changelog](https://www.almtech-radar.nl/changelog.html)
 - **Changelog**: Overzicht van wijzigingen tussen versies
 
+## Versies
+
+Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
+
+## Over Sopra Steria
+
+Meer projecten en repositories van Sopra Steria zijn te vinden op:
+
 ## Gebruik
 
 Open de [Sopra Steria ALMTech Radar](https://www.almtech-radar.nl/) in een webbrowser om de interactieve Tech Radar te bekijken. De radar toont alle technologieën georganiseerd in vier kwadranten:
@@ -54,14 +62,6 @@ Voor elke pull request wordt automatisch een preview environment aangemaakt via 
 - **Visuele Verificatie**: Reviewers kunnen wijzigingen aan de radar direct in hun browser bekijken
 - **Isolatie**: Elke PR heeft zijn eigen omgeving, zonder impact op productie
 - **Automatisch**: Geen handmatige stappen nodig voor deployment of cleanup
-
-## Versies
-
-Vorige versies kan je hier vinden: [Changelog](https://www.almtech-radar.nl/changelog.html)
-
-## Over Sopra Steria
-
-Meer projecten en repositories van Sopra Steria zijn te vinden op:
 
 ## Gebaseerd op
 
