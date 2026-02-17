@@ -63,27 +63,6 @@ Voor elke pull request wordt automatisch een preview environment aangemaakt via 
 - **Isolatie**: Elke PR heeft zijn eigen omgeving, zonder impact op productie
 - **Automatisch**: Geen handmatige stappen nodig voor deployment of cleanup
 
-## Toegankelijkheid
-
-We streven ernaar om de Tech Radar toegankelijk te maken voor alle gebruikers, inclusief gebruikers met beperkingen. Voor gedetailleerde informatie over de toegankelijkheid van de applicatie, zie:
-
-- **[Accessibility Analysis Report](ACCESSIBILITY_ANALYSIS.md)** - Uitgebreide analyse van toegankelijkheidskenmerken en -barrières
-- **[Accessibility Improvement Roadmap](ACCESSIBILITY_IMPROVEMENT_ROADMAP.md)** - Prioriteiten en implementatieplan voor verbeteringen
-- **[Accessibility Issues Summary](ACCESSIBILITY_ISSUES.md)** - Korte samenvatting van problemen voor het aanmaken van GitHub issues
-
-### Huidige Status
-
-De applicatie heeft een **mobiele lijstweergave** die toegankelijker is dan de SVG-radar visualisatie. We werken aan het verbeteren van de toegankelijkheid van de volledige radar.
-
-### Geplande Verbeteringen
-
-- Toetsenbord navigatie voor SVG radar
-- ARIA labels voor schermlezers
-- Verbeterde kleurcontrasten
-- Focus indicatoren voor toetsenbordgebruikers
-
-Voor vragen of suggesties over toegankelijkheid, open een issue in deze repository.
-
 ## Gebaseerd op
 
 - [ThoughtWorks Tech Radar](https://www.thoughtworks.com/radar)
