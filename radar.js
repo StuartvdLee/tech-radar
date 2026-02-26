@@ -343,7 +343,7 @@ function radar_visualization(config) {
                     .text(config.rings[ring].name)
                     .attr("class", "legend-ring-name legend-ring-name-q" + quadrant)
                     .style("font-family", "Raleway")
-                    .style("font-size", "12px")
+                    .style("font-size", "14px")
                     .style("font-weight", "bold")
                     .style("fill", config.rings[ring].color);
                 legend.selectAll(".legend" + quadrant + ring)

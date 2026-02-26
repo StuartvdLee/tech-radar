@@ -1,13 +1,13 @@
 :root {
-    --kleur-achtergrond: #858383;
+    --kleur-achtergrond: white;
     /* officieel #00116E */
-    --kleur-tekst: white;
+    --kleur-tekst: #2A1449;
     --kleur-accent: var(--kleur-onderzoek);
 
-    --kleur-gebruik: #66d08f;
-    --kleur-probeer: #F47216;
-    --kleur-onderzoek: #000000;
-    --kleur-verminder: #DB1D2B;
+    --kleur-gebruik: #2E7D32;
+    --kleur-probeer: #E65100;
+    --kleur-onderzoek: #1565C0;
+    --kleur-verminder: #B71C1C;
 }
 
 body {
@@ -165,7 +165,7 @@ a {
 }
 
 .mobile-lists details {
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    border: 1px solid rgba(42, 20, 73, 0.25);
     border-radius: 8px;
     margin: 8px 0;
     background: transparent;
