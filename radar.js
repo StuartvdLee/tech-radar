@@ -335,17 +335,15 @@ function radar_visualization(config) {
                 .attr("class", "legend-quadrant-title")
                 .style("font-family", "Raleway")
                 .style("font-size", "20px")
-                .style("font-weight", "900")
-                .style("fill", config.colors.text);
+                .style("font-weight", "bold")
             for (var ring = 0; ring < config.num_rings; ring++) {
                 legend.append("text")
                     .attr("transform", legend_transform(quadrant, ring))
                     .text(config.rings[ring].name)
                     .attr("class", "legend-ring-name legend-ring-name-q" + quadrant)
                     .style("font-family", "Raleway")
-                    .style("font-size", "12px")
+                    .style("font-size", "14px")
                     .style("font-weight", "bold")
-                    .style("fill", config.rings[ring].color);
                 legend.selectAll(".legend" + quadrant + ring)
                     .data(segmented[quadrant][ring])
                     .enter()
