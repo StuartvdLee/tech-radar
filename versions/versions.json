@@ -1,32 +1,37 @@
 [
-    {
-        "version": "2026-01-01",
-        "title": "2026.01",
-        "description": "Initiële versie"
-    },
-    {
-        "version": "2026-01-13",
-        "title": "2026.01.13",
-        "description": "Update Track Power Power Platform & Copilot"
-    },
-    {
-        "version": "2026-01-26",
-        "title": "2026.01.26",
-        "description": "Update Track Data & AI"
-    },
-    {
-        "version": "2026-01-28",
-        "title": "2026.01.28",
-        "description": "Update Track Applications"
-    },
-    {
-        "version": "2026-02-04",
-        "title": "2026.02.04",
-        "description": "Update Track DevOps"
-    },
-    {
-        "version": "2026-02-06",
-        "title": "2026.02.06",
-        "description": "Update Track DevOps"
-    }
+  {
+    "version": "2026-01-01",
+    "title": "2026.01",
+    "description": "Initiële versie"
+  },
+  {
+    "version": "2026-01-13",
+    "title": "2026.01.13",
+    "description": "Update Track Power Power Platform & Copilot"
+  },
+  {
+    "version": "2026-01-26",
+    "title": "2026.01.26",
+    "description": "Update Track Data & AI"
+  },
+  {
+    "version": "2026-01-28",
+    "title": "2026.01.28",
+    "description": "Update Track Applications"
+  },
+  {
+    "version": "2026-02-04",
+    "title": "2026.02.04",
+    "description": "Update Track DevOps"
+  },
+  {
+    "version": "2026-02-06",
+    "title": "2026.02.06",
+    "description": "Update Track DevOps"
+  },
+  {
+    "version": "2026-09-05",
+    "title": "2026.09.05",
+    "description": "Update van John Bruin"
+  }
 ]

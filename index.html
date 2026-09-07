@@ -45,11 +45,11 @@ Kleuren:
     <link rel="icon" href="favicon.ico">
 
     <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="radar.js"></script>
+    <script src="radar.js?v=20260904"></script>
 
 </head>
 
-<body>
+<body class="radar-page">
 
     <div class="center-box header-box">
         <a href="https://www.soprasteria.nl/">
@@ -62,6 +62,13 @@ Kleuren:
     <div id="mobile-lists" class="mobile-lists"></div>
 
     <script>
+        const isLocalEnvironment = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)
+            || window.location.protocol === "file:";
+
+        document.querySelectorAll('[data-local-only]').forEach(element => {
+            element.hidden = !isLocalEnvironment;
+        });
+
         fetch("/versions/versions.json")
             .then(response => response.json())
             .then(data => {
@@ -152,8 +159,8 @@ Kleuren:
             });
     </script>
 
-    <div class="center-box">
-        <div class="column">
+    <main class="content-shell">
+        <section class="content-card">
             <h3>Wat is de Sopra Steria ALMTech Radar?</h3>
             <p>
                 De Sopra Steria ALMTech Radar is een lijst van technieken ondersteund door een <em>ring assignment</em>.
@@ -171,8 +178,7 @@ Kleuren:
                 <li><strong style="color: var(--kleur-verminder)">Verminder</strong> &mdash; Inzet op deze technieken
                     dient verminderd te worden.</li>
             </ul>
-        </div>
-        <div class="column">
+
             <h3>Wat is het doel?</h3>
             <p>
                 Deze Tech Radar is bedoeld om alignment te creëren voor onze practices.
@@ -185,6 +191,9 @@ Kleuren:
             <p>
                 Vorige versies kan je hier vinden: <a href="changelog.html">Changelog</a>
             </p>
+            <p data-local-only hidden>
+                Nieuwe versie maken: <a href="editor.html">Radar editor</a>
+            </p>
             <p>
                 <em>Gebaseerd op: <a href="https://www.thoughtworks.com/radar">ThoughtWorks</a>,
                     <a href="https://github.com/zalando/tech-radar"> Zalando TechRadar</a> en
@@ -194,8 +203,8 @@ Kleuren:
             <p>
                 <em>Github repo: <a href="https://github.com/StuartvdLee/tech-radar">Sopra Steria ALMTech Radar</a></em>
             </p>
-        </div>
-    </div>
+        </section>
+    </main>
 
 </body>
 

@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sopra Steria ALMTech Radar | Editor</title>
+    <link rel="stylesheet" href="radar.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+</head>
+
+<body class="editor-page content-page">
+    <div class="center-box header-box">
+        <a href="https://www.soprasteria.nl/">
+            <img src="sopra-steria-logo.svg" alt="Sopra Steria logo">
+        </a>
+        <h1>ALMTech Radar Editor</h1>
+    </div>
+
+    <main class="editor-shell content-shell">
+        <section class="editor-card content-card">
+            <h2>Nieuwe versie aanmaken</h2>
+            <p>
+                Deze editor kopieert de nieuwste radarversie naar een nieuw datumgebonden JSON-bestand en voegt die
+                datum ook toe aan <strong>versions.json</strong>.
+            </p>
+
+            <div class="editor-grid">
+                <div class="editor-field">
+                    <label for="version-date">Datum</label>
+                    <input id="version-date" type="date">
+                </div>
+                <div class="editor-field">
+                    <label for="version-title">Titel</label>
+                    <input id="version-title" type="text" placeholder="2026.09.04">
+                </div>
+            </div>
+
+            <div class="editor-field" style="margin-top: 16px;">
+                <label for="version-description">Omschrijving</label>
+                <textarea id="version-description" placeholder="Bijvoorbeeld: Update Track DevOps"></textarea>
+            </div>
+
+            <div class="editor-actions">
+                <button id="pick-folder" class="editor-button secondary" type="button">Projectmap kiezen</button>
+                <button id="create-version" class="editor-button" type="button">Nieuwe versie schrijven</button>
+            </div>
+
+            <p id="folder-meta" class="editor-meta">Nog geen projectmap gekozen. De editor kan pas schrijven nadat je de repo-map hebt geselecteerd.</p>
+            <p id="status" class="editor-status"></p>
+        </section>
+
+        <section class="editor-card content-card">
+            <h2>Radaritems bewerken</h2>
+            <p>
+                Bewerk de inhoud met leesbare keuzes. De editor vertaalt dit daarna terug naar de juiste JSON-structuur.
+            </p>
+            <div class="editor-toolbar">
+                <input id="entry-search" type="search" placeholder="Zoek op label, category of link">
+                <button id="add-entry" class="editor-button secondary" type="button">Nieuw item toevoegen</button>
+            </div>
+            <p class="editor-meta" id="entries-meta"></p>
+            <div id="entries-list" class="entries-list"></div>
+        </section>
+    </main>
+
+    <script>
+        const quadrantOptions = [
+            { value: 0, label: '0 - Infrastructuur & Platformen (rechtsboven)' },
+            { value: 1, label: '1 - Talen & Frameworks (linksboven)' },
+            { value: 2, label: '2 - Architectuur & Cultuur (linksonder)' },
+            { value: 3, label: '3 - Ondersteuning & Tools (rechtsonder)' }
+        ];
+
+        const ringOptions = [
+            { value: 0, label: '0 - Gebruik' },
+            { value: 1, label: '1 - Probeer' },
+            { value: 2, label: '2 - Onderzoek' },
+            { value: 3, label: '3 - Verminder' }
+        ];
+
+        const statusOptions = [
+            { value: 0, label: '0 - Onveranderd' },
+            { value: 1, label: '1 - Nieuw' },
+            { value: 2, label: '2 - Verplaatst' }
+        ];
+
+        const dateInput = document.getElementById('version-date');
+        const titleInput = document.getElementById('version-title');
+        const descriptionInput = document.getElementById('version-description');
+        const pickFolderButton = document.getElementById('pick-folder');
+        const createVersionButton = document.getElementById('create-version');
+        const addEntryButton = document.getElementById('add-entry');
+        const entrySearchInput = document.getElementById('entry-search');
+        const folderMeta = document.getElementById('folder-meta');
+        const entriesMeta = document.getElementById('entries-meta');
+        const entriesList = document.getElementById('entries-list');
+        const status = document.getElementById('status');
+
+        let projectDirectoryHandle = null;
+        let versionList = [];
+        let latestVersion = null;
+        let latestEntries = [];
+        let editableEntries = [];
+
+        function escapeHtml(value) {
+            return String(value ?? '')
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;');
+        }
+
+        function normalizeEntry(entry = {}) {
+            return {
+                quadrant: Number.isInteger(entry.quadrant) ? entry.quadrant : 0,
+                ring: Number.isInteger(entry.ring) ? entry.ring : 0,
+                label: entry.label || '',
+                link: entry.link || '',
+                category: Array.isArray(entry.category) ? entry.category.join(', ') : (entry.category || ''),
+                active: entry.active !== false,
+                status: Number.isInteger(entry.status) ? entry.status : 0
+            };
+        }
+
+        function denormalizeEntry(entry) {
+            const categories = entry.category
+                .split(',')
+                .map(item => item.trim())
+                .filter(Boolean);
+
+            const result = {
+                quadrant: Number(entry.quadrant),
+                ring: Number(entry.ring),
+                label: entry.label.trim(),
+                link: entry.link.trim(),
+                category: categories,
+                status: Number(entry.status)
+            };
+
+            if (!entry.active) {
+                result.active = false;
+            }
+
+            return result;
+        }
+
+        function buildOptions(options, selectedValue) {
+            return options.map(option => {
+                const selected = Number(selectedValue) === option.value ? ' selected' : '';
+                return `<option value="${option.value}"${selected}>${escapeHtml(option.label)}</option>`;
+            }).join('');
+        }
+
+        function getFilteredEntries() {
+            const query = entrySearchInput.value.trim().toLowerCase();
+            if (!query) {
+                return editableEntries.map((entry, index) => ({ entry, index }));
+            }
+
+            return editableEntries
+                .map((entry, index) => ({ entry, index }))
+                .filter(({ entry }) => [entry.label, entry.link, entry.category]
+                    .join(' ')
+                    .toLowerCase()
+                    .includes(query));
+        }
+
+        function renderEntries() {
+            const filteredEntries = getFilteredEntries();
+            entriesMeta.textContent = `${filteredEntries.length} van ${editableEntries.length} items zichtbaar`;
+
+            if (filteredEntries.length === 0) {
+                entriesList.innerHTML = '<p class="editor-meta">Geen items gevonden voor deze zoekopdracht.</p>';
+                return;
+            }
+
+            entriesList.innerHTML = filteredEntries.map(({ entry, index }) => `
+                <article class="entry-card" data-index="${index}">
+                    <div class="entry-card-header">
+                        <div class="entry-card-title">${escapeHtml(entry.label || `Nieuw item ${index + 1}`)}</div>
+                        <button class="editor-button secondary" type="button" data-action="remove-entry">Verwijderen</button>
+                    </div>
+                    <div class="entry-grid">
+                        <label class="editor-field wide">
+                            <span>Label</span>
+                            <input type="text" data-field="label" value="${escapeHtml(entry.label)}" placeholder="Naam van de technologie">
+                        </label>
+                        <label class="editor-field wide">
+                            <span>Link</span>
+                            <input type="url" data-field="link" value="${escapeHtml(entry.link)}" placeholder="https://...">
+                        </label>
+                        <label class="editor-field wide">
+                            <span>Categories</span>
+                            <input type="text" data-field="category" value="${escapeHtml(entry.category)}" placeholder="Bijvoorbeeld: AI, Azure, DevOps">
+                        </label>
+                        <label class="editor-field">
+                            <span>Quadrant</span>
+                            <select data-field="quadrant">${buildOptions(quadrantOptions, entry.quadrant)}</select>
+                        </label>
+                        <label class="editor-field">
+                            <span>Ring</span>
+                            <select data-field="ring">${buildOptions(ringOptions, entry.ring)}</select>
+                        </label>
+                        <label class="editor-field">
+                            <span>Status</span>
+                            <select data-field="status">${buildOptions(statusOptions, entry.status)}</select>
+                        </label>
+                        <label class="entry-checkbox">
+                            <input type="checkbox" data-field="active" ${entry.active ? 'checked' : ''}>
+                            <span>Zichtbaar op de radar</span>
+                        </label>
+                    </div>
+                    <div class="entry-help">
+                        Quadrant, ring en status worden automatisch als de juiste numerieke waarden opgeslagen in JSON.
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        function updateEntryCardTitle(index) {
+            const cardTitle = entriesList.querySelector(`[data-index="${index}"] .entry-card-title`);
+            const currentEntry = editableEntries[index];
+
+            if (!cardTitle || !currentEntry) {
+                return;
+            }
+
+            cardTitle.textContent = currentEntry.label || `Nieuw item ${index + 1}`;
+        }
+
+        function updateEntry(index, field, value) {
+            const currentEntry = editableEntries[index];
+            if (!currentEntry) {
+                return;
+            }
+
+            currentEntry[field] = value;
+
+            if (field === 'label') {
+                updateEntryCardTitle(index);
+            }
+        }
+
+        function buildVersionEntriesJson() {
+            return editableEntries.map(denormalizeEntry);
+        }
+
+        function validateEntries() {
+            const emptyLabelIndex = editableEntries.findIndex(entry => !entry.label.trim());
+            if (emptyLabelIndex >= 0) {
+                throw new Error(`Item ${emptyLabelIndex + 1} mist een label.`);
+            }
+        }
+
+        function setStatus(message, type = '') {
+            status.textContent = message;
+            status.className = 'editor-status' + (type ? ' ' + type : '');
+        }
+
+        function formatTitleFromDate(dateString) {
+            return dateString.replace(/-/g, '.');
+        }
+
+        function formatEditorError(error) {
+            if (!error) {
+                return 'Onbekende fout in de editor.';
+            }
+
+            if (error.name === 'AbortError') {
+                return 'Mapselectie afgebroken.';
+            }
+
+            if (error.name === 'NotFoundError') {
+                return 'De gekozen map klopt niet of bevat geen geldige radarbestanden. Kies de hoofdmap van tech-radar met daarin de map versions en versions.json.';
+            }
+
+            if (error.name === 'NotAllowedError') {
+                return 'De browser heeft geen schrijfrechten gekregen voor deze map.';
+            }
+
+            return error.message || String(error);
+        }
+
+        function buildNextVersionsJson() {
+            const version = dateInput.value;
+            const title = titleInput.value.trim();
+            const description = descriptionInput.value.trim();
+
+            if (!version || !title || !description) {
+                return null;
+            }
+
+            const remaining = versionList.filter(item => item.version !== version);
+            const nextList = [...remaining, { version, title, description }]
+                .sort((a, b) => a.version < b.version ? -1 : a.version > b.version ? 1 : 0);
+
+            return nextList;
+        }
+
+        async function loadLatestVersion() {
+            const response = await fetch('/versions/versions.json');
+            versionList = await response.json();
+            versionList.sort((a, b) => a.version < b.version ? 1 : -1);
+            latestVersion = versionList[0];
+
+            const latestEntriesResponse = await fetch(`/versions/${latestVersion.version}.json`);
+            latestEntries = await latestEntriesResponse.json();
+            editableEntries = latestEntries.map(normalizeEntry);
+
+            renderEntries();
+        }
+
+        function setTodayIfEmpty() {
+            if (dateInput.value) {
+                return;
+            }
+
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            dateInput.value = `${yyyy}-${mm}-${dd}`;
+            titleInput.value = formatTitleFromDate(dateInput.value);
+        }
+
+        async function ensureProjectFolder() {
+            if (!window.showDirectoryPicker) {
+                throw new Error('Deze browser ondersteunt geen maptoegang. Open de editor via een recente Chromium-browser op localhost.');
+            }
+
+            projectDirectoryHandle = await window.showDirectoryPicker({ mode: 'readwrite' });
+            const versionsHandle = await projectDirectoryHandle.getDirectoryHandle('versions');
+            await versionsHandle.getFileHandle('versions.json');
+            if (latestVersion) {
+                await versionsHandle.getFileHandle(`${latestVersion.version}.json`);
+            }
+            folderMeta.textContent = `Gekozen projectmap: ${projectDirectoryHandle.name}`;
+        }
+
+        async function writeTextFile(fileHandle, content) {
+            const writable = await fileHandle.createWritable();
+            await writable.write(content);
+            await writable.close();
+        }
+
+        function formatJson(data) {
+            return JSON.stringify(data, null, 2);
+        }
+
+        async function createVersionFiles() {
+            const version = dateInput.value;
+            const title = titleInput.value.trim();
+            const description = descriptionInput.value.trim();
+
+            if (!version || !title || !description) {
+                throw new Error('Vul datum, titel en omschrijving in.');
+            }
+
+            if (!projectDirectoryHandle) {
+                throw new Error('Kies eerst de projectmap.');
+            }
+
+            validateEntries();
+
+            const versionsHandle = await projectDirectoryHandle.getDirectoryHandle('versions');
+            const newVersionFileHandle = await versionsHandle.getFileHandle(`${version}.json`, { create: true });
+            const versionsListFileHandle = await versionsHandle.getFileHandle('versions.json');
+
+            const nextVersions = buildNextVersionsJson();
+            const versionEntries = buildVersionEntriesJson();
+
+            await writeTextFile(newVersionFileHandle, formatJson(versionEntries) + '\n');
+            await writeTextFile(versionsListFileHandle, formatJson(nextVersions) + '\n');
+
+            const existingIndex = versionList.findIndex(item => item.version === version);
+            if (existingIndex >= 0) {
+                versionList[existingIndex] = { version, title, description };
+            } else {
+                versionList.push({ version, title, description });
+            }
+            versionList.sort((a, b) => a.version < b.version ? 1 : -1);
+            latestVersion = versionList[0];
+
+            setStatus(`Nieuwe versie opgeslagen: versions/${version}.json en versions/versions.json bijgewerkt.`, 'success');
+        }
+
+        dateInput.addEventListener('input', () => {
+            titleInput.value = formatTitleFromDate(dateInput.value);
+        });
+        entrySearchInput.addEventListener('input', renderEntries);
+
+        addEntryButton.addEventListener('click', () => {
+            editableEntries.unshift(normalizeEntry({ status: 1 }));
+            renderEntries();
+        });
+
+        entriesList.addEventListener('input', event => {
+            const card = event.target.closest('[data-index]');
+            if (!card) {
+                return;
+            }
+
+            const index = Number(card.dataset.index);
+            const field = event.target.dataset.field;
+            if (!field) {
+                return;
+            }
+
+            const value = field === 'active' ? event.target.checked : event.target.value;
+            updateEntry(index, field, value);
+        });
+
+        entriesList.addEventListener('click', event => {
+            const button = event.target.closest('[data-action="remove-entry"]');
+            const card = event.target.closest('[data-index]');
+            if (!button || !card) {
+                return;
+            }
+
+            const index = Number(card.dataset.index);
+            editableEntries.splice(index, 1);
+            renderEntries();
+        });
+
+        pickFolderButton.addEventListener('click', async () => {
+            try {
+                setStatus('');
+                await ensureProjectFolder();
+            } catch (error) {
+                setStatus(formatEditorError(error), 'error');
+            }
+        });
+
+        createVersionButton.addEventListener('click', async () => {
+            try {
+                setStatus('');
+                await createVersionFiles();
+            } catch (error) {
+                setStatus(formatEditorError(error), 'error');
+            }
+        });
+
+        setTodayIfEmpty();
+        loadLatestVersion().catch(error => {
+            setStatus(`Laden mislukt: ${formatEditorError(error)}`, 'error');
+        });
+    </script>
+</body>
+
+</html>
