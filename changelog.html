@@ -1,27 +1,38 @@
-<html>
+<!DOCTYPE html>
+<html lang="nl">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sopra Steria ALMTech Radar | Changelog</title>
 
     <link rel="stylesheet" href="radar.css">
-    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
 </head>
 
-<body>
+<body class="content-page">
     <div class="center-box header-box">
         <a href="https://www.soprasteria.nl/">
             <img src="sopra-steria-logo.svg" alt="Sopra Steria logo">
         </a>
-        <h1>ALMTech Radar</h1>
+        <h1>ALMTech Radar Changelog</h1>
     </div>
 
-    <div class="center-box">
-        <div id="changelog" class="column">
+    <main class="content-shell">
+        <section id="changelog" class="content-card changelog-list">
             <h2>Changelog</h2>
-        </div>
-</body>
+            <p class="editor-meta" data-local-only hidden><a href="editor.html">Nieuwe radarversie aanmaken</a></p>
+        </section>
+    </main>
 
 <script>
+    const isLocalEnvironment = ["localhost", "127.0.0.1", "::1"].includes(window.location.hostname)
+        || window.location.protocol === "file:";
+
+    document.querySelectorAll('[data-local-only]').forEach(element => {
+        element.hidden = !isLocalEnvironment;
+    });
+
     const changelog = document.getElementById('changelog');
 
     fetch("/versions/versions.json")
@@ -29,7 +40,10 @@
         .then(data => {
             data.sort((a, b) => a.version < b.version ? 1 : -1);
 
-            for (d of data) {
+            for (const d of data) {
+                const item = document.createElement('article');
+                item.className = 'entry-card changelog-item';
+
                 const h = document.createElement('h3');
                 const a = document.createElement('a');
                 a.setAttribute('href', d.version === data[0].version ? '/' : `/?version=${d.version}`);
@@ -39,10 +53,13 @@
                 const p = document.createElement('p');
                 p.append(document.createTextNode(d.description));
 
-                changelog.appendChild(h);
-                changelog.appendChild(p);
+                item.appendChild(h);
+                item.appendChild(p);
+                changelog.appendChild(item);
             }
         });
 </script>
+
+</body>
 
 </html>

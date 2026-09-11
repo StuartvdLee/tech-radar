@@ -15,6 +15,7 @@
 function radar_visualization(config) {
 
     const style = getComputedStyle(document.documentElement);
+    const displayScale = 1;
 
     config.svg_id = "radar";
     config.width = 1450;
@@ -206,13 +207,13 @@ function radar_visualization(config) {
     }
 
 
-    // Make SVG responsive using viewBox instead of fixed size
+    // Make SVG responsive to browser zoom
     var svg = d3.select("svg#" + config.svg_id)
         .style("background-color", config.colors.background)
+        .style("width", (config.width * displayScale) + "px")
+        .style("height", (config.height * displayScale) + "px")
         .attr("viewBox", "0 0 " + config.width + " " + config.height)
-        .attr("preserveAspectRatio", "xMidYMid meet")
-        .style("width", "100%")
-        .style("height", "auto");
+        .attr("preserveAspectRatio", "xMidYMid meet");
 
     // Collapse legend by default on very small screens
     if (window.innerWidth <= 480) {

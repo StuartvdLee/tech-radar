@@ -9,21 +9,32 @@
     --kleur-verminder: #F07D00;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Raleway';
-    padding-top: 10px;
-    padding-bottom: 20px;
+    padding: 20px;
     background-color: var(--kleur-achtergrond);
     color: var(--kleur-tekst);
     overflow-x: hidden;
+    margin: 0;
 }
 
-img {
-    width: 210px;
+.header-box a {
+    justify-self: start;
+}
+
+.header-box img {
+    display: block;
+    width: 140px;
+    height: auto;
 }
 
 h1 {
-    padding: 0 15px 0 15px;
+    margin: 0;
+    padding: 0;
 }
 
 h3 {
@@ -46,40 +57,283 @@ a {
 .center-box {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    gap: 8px;
-}
-
-/* Header-specific alignment: center logo and title vertically */
-.header-box {
     align-items: center;
     gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 20px;
+    margin-bottom: 5px;
 }
 
-/* Ensure logo and title centers align */
+.header-box {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 140px 1fr 140px;
+    align-items: center;
+    min-height: 64px;
+}
+
+.header-box::after {
+    content: "";
+}
+
 .header-box h1 {
+    font-size: 28px;
     margin: 0;
-    /* remove UA default margins that offset centering */
-    line-height: 1.2;
+    padding: 0;
+    text-align: center;
 }
 
-.header-box img {
-    display: block;
-    /* avoid baseline alignment quirks */
+.radar-page .header-box a {
+    position: absolute;
+    left: 50px;
+    top: 50%;
+    transform: translateY(calc(-50% + 10px));
 }
 
-.column {
-    width: 640px;
-    padding: 0 20px 0 20px;
+.radar-page .header-box {
+    width: 1450px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
 }
 
-/* Responsive SVG sizing */
+.radar-page .header-box h1 {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.editor-page .header-box {
+    width: 980px;
+    max-width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.editor-page .header-box a {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.content-page .header-box {
+    width: 980px;
+    max-width: calc(100% - 32px);
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.content-page .header-box a {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.content-shell {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 16px 40px;
+}
+
+.radar-page .content-shell {
+    width: 1450px;
+    max-width: 1450px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.content-card {
+    border: 1px solid rgba(42, 20, 73, 0.16);
+    border-radius: 12px;
+    padding: 24px;
+    background: rgba(255, 255, 255, 0.96);
+    margin-bottom: 20px;
+}
+
+.editor-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+.editor-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.editor-field label {
+    font-weight: 700;
+}
+
+.editor-field input,
+.editor-field textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid rgba(42, 20, 73, 0.25);
+    border-radius: 8px;
+    color: var(--kleur-tekst);
+}
+
+.editor-field textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.editor-button {
+    appearance: none;
+    border: 1px solid var(--kleur-tekst);
+    background: var(--kleur-tekst);
+    color: white;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font: inherit;
+    cursor: pointer;
+}
+
+.editor-button.secondary {
+    background: white;
+    color: var(--kleur-tekst);
+}
+
+.editor-button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.editor-meta {
+    font-size: 14px;
+    color: rgba(42, 20, 73, 0.8);
+}
+
+.editor-status {
+    min-height: 24px;
+    font-weight: 700;
+}
+
+.editor-status.error {
+    color: #b42318;
+}
+
+.editor-status.success {
+    color: #027a48;
+}
+
+.editor-toolbar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 16px 0;
+}
+
+.editor-toolbar input {
+    flex: 1 1 280px;
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid rgba(42, 20, 73, 0.25);
+    border-radius: 8px;
+    color: var(--kleur-tekst);
+}
+
+.entries-list {
+    display: grid;
+    gap: 16px;
+}
+
+.entry-card {
+    border: 1px solid rgba(42, 20, 73, 0.16);
+    border-radius: 12px;
+    padding: 18px;
+    background: #fcfbfe;
+}
+
+.entry-card-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.entry-card-title {
+    font-weight: 800;
+}
+
+.entry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+
+.entry-grid .wide {
+    grid-column: 1 / -1;
+}
+
+.entry-grid select,
+.entry-grid input {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid rgba(42, 20, 73, 0.25);
+    border-radius: 8px;
+    color: var(--kleur-tekst);
+    background: white;
+}
+
+.entry-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    min-height: 42px;
+}
+
+.entry-checkbox input {
+    width: 18px;
+    height: 18px;
+}
+
+.entry-help {
+    margin-top: 10px;
+    font-size: 13px;
+    color: rgba(42, 20, 73, 0.76);
+}
+
+.changelog-list {
+    display: grid;
+    gap: 16px;
+}
+
+.changelog-item h3 {
+    margin: 0 0 8px;
+}
+
+.changelog-item p {
+    margin: 0;
+}
+
+
+/* SVG scales with browser zoom */
 #radar {
     display: block;
-    margin: auto;
-    width: 100%;
-    height: auto;
+    margin: 0 auto;
 }
 
 /* Stack columns on small screens */
@@ -91,6 +345,28 @@ a {
 
     .center-box {
         flex-direction: column;
+    }
+
+    .header-box {
+        grid-template-columns: 1fr;
+        padding-top: 76px;
+    }
+
+    .header-box a {
+        justify-self: center;
+    }
+
+    .radar-page .header-box a {
+        transform: none;
+    }
+
+    .content-page .header-box a {
+        position: static;
+        transform: none;
+    }
+
+    .header-box::after {
+        display: none;
     }
 }
 
@@ -219,13 +495,6 @@ a {
 
 /* Ensure full radar fits on larger screens */
 @media (min-width: 641px) {
-    #radar {
-        width: 100% !important;
-        height: auto !important;
-        max-height: calc(100vh - 140px);
-        /* scale responsively while fitting in viewport */
-    }
-
     .mobile-lists {
         display: none;
     }
